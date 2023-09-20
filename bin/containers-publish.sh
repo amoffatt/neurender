@@ -1,10 +1,13 @@
 #!/bin/sh
 
-SCRIPT_DIR=$(dirname $0)
-REPOSITORY=airstudio
+# Change directory to the project root
+cd $(dirname $0)/..
 
-docker-compose -f $SCRIPT_DIR/../containers/nerfstudio//docker-compose.yml build
-docker-compose -f $SCRIPT_DIR/../containers/neurender/docker-compose.yml build
+# Build containers first
+/bin/sh bin/containers-build.sh
 
-docker push $REPOSITORY/nerfstudio
-docker push $REPOSITORY/neurender
+source .env
+
+docker push $DOCKER_REPOSITORY/neurender-ctl
+docker push $DOCKER_REPOSITORY/nerfstudio
+docker push $DOCKER_REPOSITORY/neurender
