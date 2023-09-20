@@ -1,0 +1,16 @@
+version: '3'
+services:
+  vastai-test:
+    image: airstudio/remote-gpu-control
+    platform: linux/amd64
+    env_file:
+      - ../../remotectl.env
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - VAST_AI_KEY=${VAST_AI_KEY}
+    stdin_open: true
+    tty: true
+    volumes:
+      - ${HOST_VOLUME}:/data

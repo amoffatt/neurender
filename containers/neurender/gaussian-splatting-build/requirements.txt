@@ -1,0 +1,6 @@
+plyfile
+torchaudio
+torchvision
+tqdm
+wheels/diff_gaussian_rasterization-0.0.0-cp310-cp310-linux_x86_64.whl
+wheels/simple_knn-0.0.0-cp310-cp310-linux_x86_64.whl
