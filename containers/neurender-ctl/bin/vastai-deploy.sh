@@ -27,7 +27,7 @@ then
 fi
 
 
-result=$(vastai create instance ${OFFER_ID} --image image/${IMAGE_ID})
+result=$(vastai create instance ${OFFER_ID} --image ${IMAGE_ID} --ssh)
 echo "Create instance result: $result"
 
 # Parse the result. Example result: 'Started. {'success': True, 'new_contract': 7053615}'
