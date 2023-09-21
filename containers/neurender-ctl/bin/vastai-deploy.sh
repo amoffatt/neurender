@@ -7,27 +7,30 @@ if [ ! -d "$VASTAI_DIR" ]; then
 fi
 
 function usage() {
-    echo "Usage: $0 OFFER_ID [IMAGE_ID]"
-    echo "VastAI Offer ID"
-    echo "IMAGE_ID: The docker image to deploy"
+    echo "Usage: $0 <offer-id> [image] [disk_size]"
+    echo "offer-id: VastAI Offer ID"
+    echo "image: The docker image to deploy"
+    echo "disk_size: Requested disk size in GB"
     exit 1
 }
 
-if [ "$#" -ne 2 ]
+if [ "$#" -lt 2 ]
 then
   usage
 fi
 
 OFFER_ID=$1
 IMAGE_ID=$2
+DISK_SIZE=32
 
-if [ "$#" -gt 2 ]
+if [ "$#" -gt 3 ]
 then
-    IMAGE_ID=$2
+    DISK_SIZE=$3
 fi
 
 
-result=$(vastai create instance ${OFFER_ID} --image ${IMAGE_ID} --ssh)
+
+result=$(vastai create instance $OFFER_ID --image $IMAGE_ID --disk $DISK_SIZE)
 echo "Create instance result: $result"
 
 # Parse the result. Example result: 'Started. {'success': True, 'new_contract': 7053615}'
