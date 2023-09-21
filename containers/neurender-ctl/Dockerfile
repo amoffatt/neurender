@@ -11,13 +11,10 @@ USER root
 RUN apt-get install -y jq
 
 
-USER air
+USER $USER
 
 SHELL [ "/bin/bash", "-c" ]
 RUN pip install vastai
 RUN vastai set api-key ${VAST_AI_KEY}
 
 COPY --chown=$USER:$USER bin/* /home/air/bin
-
-
-# ENV PATH=~/bin:$PATH
